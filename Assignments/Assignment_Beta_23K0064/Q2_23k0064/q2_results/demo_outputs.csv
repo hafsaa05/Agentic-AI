@@ -1,0 +1,9 @@
+message,expected_tool,model_output,valid_json,right_tool,refund_by_mistake
+Where is my order? I placed it last Tuesday,check_order_status,"{""name"": ""check_order_status"", ""arguments"": {""order_date"": ""last Tuesday""}}",True,True,False
+When will my package arrive? The tracking number is TRK784512.,track_shipment,"{""name"": ""track_shipment"", ""arguments"": {""tracking_number"": ""TRK784512""}}",True,True,False
+What is the expected delivery date for order 45821?,check_order_status,"{""name"": ""track_shipment"", ""arguments"": {""tracking_number"": ""45821""}}",True,False,False
+Can you check the status of order 10293 please?,check_order_status,"{""name"": ""check_order_status"", ""arguments"": {""order_id"": ""10293""}}",True,True,False
+The blender in order 99812 arrived broken. I want my money back.,initiate_refund,"{""name"": ""initiate_refund"", ""arguments"": {""order_id"": ""99812"", ""reason"": ""broken""}}",True,True,False
+"Please refund order 77341, the shoes were the wrong size.",initiate_refund,"{""name"": ""initiate_refund"", ""arguments"": {""order_id"": ""77341"", ""reason"": ""wrong size""}}",True,True,False
+"My parcel PK55120LHR has not moved in 5 days, where is it?",track_shipment,"{""name"": ""track_shipment"", ""arguments"": {""tracking_number"": ""PK55120LHR""}}",True,True,False
+This is the third time I am writing to you. I want to talk to a real person now.,escalate_to_human,"{""name"": ""escalate_to_human"", ""arguments"": {""reason"": ""Customer needs immediate attention due to repeated issues."", ""priority"": ""high""}}",True,True,False

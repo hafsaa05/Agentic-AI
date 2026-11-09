@@ -1,0 +1,16 @@
+{
+ "n_test": 200,
+ "json_valid": 200,
+ "json_valid_pct": 100.0,
+ "tool_correct": 200,
+ "tool_correct_pct": 100.0,
+ "full_match": 189,
+ "full_match_pct": 94.5,
+ "hallucinated_name": 0,
+ "hallucinated_name_pct": 0.0,
+ "extra_text": 0,
+ "extra_text_pct": 0.0,
+ "no_call": 0,
+ "no_call_pct": 0.0,
+ "tokens_per_sec": 225.73507156338206
+}

@@ -1,0 +1,5 @@
+run,method,rank,trainable_params,trainable_%,peak_mem_GB,train_min,json_valid,json_valid_%,tool_acc_%,full_match_%,tok_per_s,hallucinated_names,extra_text,no_call
+lora_r4,lora,4,4616192,0.298,8.12,7.4,200/200,100.0,100.0,94.5,110.8,0,0,0
+lora_r8,lora,8,9232384,0.595,7.32,7.3,200/200,100.0,100.0,94.5,109.2,0,0,0
+lora_r16,lora,16,18464768,1.182,8.33,7.4,200/200,100.0,100.0,94.5,108.7,0,0,0
+lora_r32,lora,32,36929536,2.336,8.62,7.4,200/200,100.0,100.0,94.5,108.7,0,0,0

@@ -1,0 +1,156 @@
+{
+ "run": "lora_r8",
+ "n_wrong": 11,
+ "label_counts": {
+  "other (wrong argument value)": 7,
+  "made-up argument": 4
+ },
+ "examples": [
+  {
+   "user": "Can you find me some news articles about the Mars Rover from the last week?",
+   "gold": {
+    "name": "search_news",
+    "arguments": {
+     "keywords": [
+      "Mars Rover"
+     ],
+     "date_range": {
+      "start_date": "2022-02-01",
+      "end_date": "2022-02-08"
+     }
+    }
+   },
+   "func_names": [
+    "search_news"
+   ],
+   "output": "{\"name\": \"search_news\", \"arguments\": {\"keywords\": [\"Mars Rover\"], \"date_range\": {\"start_date\": \"2022-03-15\", \"end_date\": \"2022-03-21\"}}}",
+   "json_valid": true,
+   "tool_correct": true,
+   "full_match": false,
+   "hallucinated_name": false,
+   "extra_text": false,
+   "no_call": false,
+   "pred_name": "search_news",
+   "pred_args": {
+    "keywords": [
+     "Mars Rover"
+    ],
+    "date_range": {
+     "start_date": "2022-03-15",
+     "end_date": "2022-03-21"
+    }
+   },
+   "label": "other (wrong argument value)"
+  },
+  {
+   "user": "I am looking for a book but I can't remember the title. The author's name is George Orwell and it's a dystopian novel.",
+   "gold": {
+    "name": "search_books",
+    "arguments": {
+     "author": "George Orwell",
+     "genre": "dystopian",
+     "max_results": 5
+    }
+   },
+   "func_names": [
+    "search_books"
+   ],
+   "output": "{\"name\": \"search_books\", \"arguments\": {\"query\": \"\", \"author\": \"George Orwell\", \"genre\": \"dystopian\", \"max_results\": 5}}",
+   "json_valid": true,
+   "tool_correct": true,
+   "full_match": false,
+   "hallucinated_name": false,
+   "extra_text": false,
+   "no_call": false,
+   "pred_name": "search_books",
+   "pred_args": {
+    "query": "",
+    "author": "George Orwell",
+    "genre": "dystopian",
+    "max_results": 5
+   },
+   "label": "made-up argument"
+  },
+  {
+   "user": "Hi, I need to find a hotel in New York from 1st May to 7th May.",
+   "gold": {
+    "name": "find_hotels",
+    "arguments": {
+     "city": "New York",
+     "check_in_date": "1st May",
+     "check_out_date": "7th May"
+    }
+   },
+   "func_names": [
+    "find_hotels"
+   ],
+   "output": "{\"name\": \"find_hotels\", \"arguments\": {\"city\": \"New York\", \"check_in_date\": \"2022-05-01\", \"check_out_date\": \"2022-05-07\"}}",
+   "json_valid": true,
+   "tool_correct": true,
+   "full_match": false,
+   "hallucinated_name": false,
+   "extra_text": false,
+   "no_call": false,
+   "pred_name": "find_hotels",
+   "pred_args": {
+    "city": "New York",
+    "check_in_date": "2022-05-01",
+    "check_out_date": "2022-05-07"
+   },
+   "label": "other (wrong argument value)"
+  },
+  {
+   "user": "I just had lunch and it was a cheeseburger with fries. I think it was around 800 calories. Can you track that for me?",
+   "gold": {
+    "name": "track_calories",
+    "arguments": {
+     "meal": "Lunch - Cheeseburger with fries",
+     "calories": 800
+    }
+   },
+   "func_names": [
+    "track_calories"
+   ],
+   "output": "{\"name\": \"track_calories\", \"arguments\": {\"meal\": \"lunch\", \"calories\": 800}}",
+   "json_valid": true,
+   "tool_correct": true,
+   "full_match": false,
+   "hallucinated_name": false,
+   "extra_text": false,
+   "no_call": false,
+   "pred_name": "track_calories",
+   "pred_args": {
+    "meal": "lunch",
+    "calories": 800
+   },
+   "label": "other (wrong argument value)"
+  },
+  {
+   "user": "I am looking for a good Italian restaurant in New York. Can you help me find one?",
+   "gold": {
+    "name": "search_restaurants",
+    "arguments": {
+     "query": "Italian restaurant in New York"
+    }
+   },
+   "func_names": [
+    "search_restaurants",
+    "play_music"
+   ],
+   "output": "{\"name\": \"search_restaurants\", \"arguments\": {\"query\": \"Italian\", \"cuisine\": \"Italian\", \"location\": \"New York\"}}",
+   "json_valid": true,
+   "tool_correct": true,
+   "full_match": false,
+   "hallucinated_name": false,
+   "extra_text": false,
+   "no_call": false,
+   "pred_name": "search_restaurants",
+   "pred_args": {
+    "query": "Italian",
+    "cuisine": "Italian",
+    "location": "New York"
+   },
+   "label": "made-up argument"
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+[
+ {
+  "setting": "unmerged",
+  "tool_acc_%": 100.0,
+  "full_match_%": 96.0,
+  "json_valid_%": 100.0,
+  "tok_per_s": 92.22333237522618,
+  "run": "lora_r8"
+ },
+ {
+  "setting": "merged",
+  "tool_acc_%": 100.0,
+  "full_match_%": 96.0,
+  "json_valid_%": 100.0,
+  "tok_per_s": 187.20878293780274,
+  "run": "lora_r8"
+ }
+]

@@ -1,0 +1,6 @@
+run,method,rank,trainable_params,trainable_%,peak_mem_GB,train_min,json_valid,json_valid_%,tool_acc_%,full_match_%,tok_per_s,hallucinated_names,extra_text,no_call
+base,base,-,0,0.0,,,200/200,100.0,100.0,94.5,225.7,0,0,0
+lora_r8,lora,8,9232384,0.595,7.32,7.3,200/200,100.0,100.0,94.5,109.2,0,0,0
+qlora_r8,qlora,8,9232384,0.595,6.53,9.7,200/200,100.0,100.0,94.5,81.0,0,0,0
+dora_r8,dora,8,9877504,0.636,8.2,13.0,200/200,100.0,100.0,94.5,58.8,0,0,0
+adalora_r8,adalora,8,13851124,0.889,8.46,12.7,200/200,100.0,100.0,94.5,104.7,0,0,0

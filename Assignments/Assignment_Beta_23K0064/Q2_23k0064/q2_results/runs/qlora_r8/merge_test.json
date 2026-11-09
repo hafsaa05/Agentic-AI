@@ -1,0 +1,26 @@
+[
+ {
+  "setting": "unmerged",
+  "tool_acc_%": 100.0,
+  "full_match_%": 96.0,
+  "json_valid_%": 100.0,
+  "tok_per_s": 66.9202979682436,
+  "run": "qlora_r8"
+ },
+ {
+  "setting": "merged into 4-bit",
+  "tool_acc_%": 100.0,
+  "full_match_%": 90.0,
+  "json_valid_%": 100.0,
+  "tok_per_s": 114.24086450137644,
+  "run": "qlora_r8"
+ },
+ {
+  "setting": "merged into fp16 base",
+  "tool_acc_%": 100.0,
+  "full_match_%": 96.0,
+  "json_valid_%": 100.0,
+  "tok_per_s": 184.2858889861262,
+  "run": "qlora_r8"
+ }
+]

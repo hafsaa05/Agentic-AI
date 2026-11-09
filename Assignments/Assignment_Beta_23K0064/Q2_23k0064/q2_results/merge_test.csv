@@ -1,0 +1,8 @@
+run,setting,tok_per_s,tool_acc_%,full_match_%,json_valid_%
+lora_r8,unmerged,92.2,100.0,96.0,100.0
+lora_r8,merged,187.2,100.0,96.0,100.0
+qlora_r8,unmerged,66.9,100.0,96.0,100.0
+qlora_r8,merged into 4-bit,114.2,100.0,90.0,100.0
+qlora_r8,merged into fp16 base,184.3,100.0,96.0,100.0
+dora_r8,unmerged,49.3,100.0,96.0,100.0
+dora_r8,merged,187.3,100.0,96.0,100.0

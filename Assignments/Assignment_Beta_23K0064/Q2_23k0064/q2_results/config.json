@@ -1,0 +1,31 @@
+{
+  "base_model": "Qwen/Qwen2.5-1.5B-Instruct",
+  "seed": 42,
+  "epochs": 2,
+  "learning_rate": 0.0002,
+  "lr_scheduler": "cosine",
+  "warmup_ratio": 0.05,
+  "per_device_batch_size": 4,
+  "grad_accum_steps": 4,
+  "max_length": 1024,
+  "lora_r": 8,
+  "lora_alpha": 16,
+  "lora_dropout": 0.05,
+  "target_modules": [
+    "q_proj",
+    "k_proj",
+    "v_proj",
+    "o_proj",
+    "gate_proj",
+    "up_proj",
+    "down_proj"
+  ],
+  "precision": "fp16 mixed precision",
+  "gradient_checkpointing": true,
+  "optimizer": "adamw_torch (qlora: paged_adamw_8bit)",
+  "adalora_init_r": 12,
+  "adalora_target_r": 8,
+  "eval_max_new_tokens": 256,
+  "eval_batch_size": 16,
+  "total_optimizer_steps": 226
+}
