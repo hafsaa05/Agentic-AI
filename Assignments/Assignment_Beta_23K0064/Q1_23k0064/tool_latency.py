@@ -1,19 +1,10 @@
 """
-Tool latency timing for SaafHawa (Assignment Beta, Q1, Section 2 item 6).
+Tool latency timing for SaafHawa (Assignment Beta, Question 1).
 
-Run this once on two different days (for example today and tomorrow).
-Each run calls the air quality API and the weather API several times,
-times the heat index calculation and the knowledge base lookup locally,
-and appends every measurement to tool_latency_log.csv.
-
-Setup:
+Usage:
     pip install requests
-    set OPENAQ_API_KEY=your_key      (Windows)
-    export OPENAQ_API_KEY=your_key   (Mac/Linux)
+    set OPENAQ_API_KEY=your_key
     python tool_latency.py
-
-Get a free OpenAQ key from https://explore.openaq.org (account settings).
-Open-Meteo needs no key.
 """
 
 import csv
@@ -24,26 +15,21 @@ from datetime import datetime
 
 import requests
 
-# Karachi city centre
 LAT, LON = 24.8607, 67.0011
-CALLS_PER_API = 12          # 12 today + 12 on a second day = 24 per API (>= 20)
-PAUSE_BETWEEN_CALLS = 2     # seconds, so we don't hammer the free APIs
-LOCAL_REPEATS = CALLS_PER_API   # same count as the API calls so no tool dominates the pooled median
+CALLS_PER_API = 12
+PAUSE_BETWEEN_CALLS = 2
+LOCAL_REPEATS = CALLS_PER_API
 LOG_FILE = "tool_latency_log.csv"
 
 OPENAQ_KEY = os.environ.get("OPENAQ_API_KEY", "")
 
 
-# ---------- the four tools ----------
-
 def find_openaq_location():
-    # done once per run, not timed
     url = "https://api.openaq.org/v3/locations"
     params = {"coordinates": f"{LAT},{LON}", "radius": 25000, "limit": 10}
     r = requests.get(url, params=params, headers={"X-API-Key": OPENAQ_KEY}, timeout=30)
     r.raise_for_status()
     results = r.json().get("results", [])
-    # prefer a station that reports PM2.5
     for loc in results:
         names = [s["parameter"]["name"] for s in loc.get("sensors", [])]
         if "pm25" in names:
@@ -76,7 +62,6 @@ def weather_tool():
 
 
 def heat_index_c(temp_c, rh):
-    # NWS Rothfusz regression, done in Fahrenheit then converted back
     t = temp_c * 9 / 5 + 32
     hi = 0.5 * (t + 61.0 + (t - 68.0) * 1.2 + rh * 0.094)
     if hi >= 80:
@@ -91,7 +76,6 @@ def heat_index_c(temp_c, rh):
     return (hi - 32) * 5 / 9
 
 
-# tiny knowledge base of advisory snippets (paraphrased, short on purpose)
 KB = [
     ("heatwave children school", "Keep children indoors between 12pm and 4pm during a heatwave, give water often."),
     ("heatwave elderly", "Older people should avoid going out in peak heat and watch for dizziness or confusion."),
@@ -114,8 +98,6 @@ def kb_lookup(query):
     return [t for s, t in scored[:2] if s > 0]
 
 
-# ---------- timing ----------
-
 def log_row(writer, tool, run_label, seconds, status):
     now = datetime.now()
     writer.writerow({
@@ -136,7 +118,6 @@ def main():
     if new_file:
         writer.writeheader()
 
-    # air quality
     if OPENAQ_KEY:
         loc_id, loc_name = find_openaq_location()
         print(f"OpenAQ station: {loc_name} (id {loc_id})")
@@ -152,9 +133,8 @@ def main():
             print(f"  openaq {i+1}: {dt:.3f}s {status}")
             time.sleep(PAUSE_BETWEEN_CALLS)
     else:
-        print("OPENAQ_API_KEY not set, skipping OpenAQ (set it and run again)")
+        print("OPENAQ_API_KEY not set, skipping OpenAQ")
 
-    # weather
     last_weather = None
     for i in range(CALLS_PER_API):
         t0 = time.perf_counter()
@@ -168,7 +148,6 @@ def main():
         print(f"  open-meteo {i+1}: {dt:.3f}s {status}")
         time.sleep(PAUSE_BETWEEN_CALLS)
 
-    # heat index (local)
     if last_weather:
         temp = last_weather["current"]["temperature_2m"]
         rh = last_weather["current"]["relative_humidity_2m"]
@@ -179,7 +158,6 @@ def main():
         heat_index_c(temp, rh)
         log_row(writer, "heat_index_local", run_label, time.perf_counter() - t0, "ok")
 
-    # knowledge base lookup (local)
     for _ in range(LOCAL_REPEATS):
         t0 = time.perf_counter()
         kb_lookup("is it safe for my asthma child to jog in the evening heatwave pm2.5")
@@ -187,7 +165,6 @@ def main():
 
     f.close()
 
-    # quick summary of everything logged so far
     rows = list(csv.DictReader(open(LOG_FILE)))
     ok = [float(r["latency_s"]) for r in rows if r["status"] == "ok"]
     days = sorted({r["date"] for r in rows})
